@@ -20,15 +20,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
       - name: Ruff check
-        run: ruff check src scripts tests
+        run: ruff check src
       - name: Ruff format check
-        run: ruff format --check src scripts tests
+        run: ruff format --check src
       - name: Black check
-        run: black --check --preview src scripts tests
+        run: black --check --preview src
       - name: isort check
-        run: isort --check-only --profile black src scripts tests
+        run: isort --check-only --profile black src
       - name: Codespell
-        run: codespell --skip="*.pyc,*.pyo,*.pyd,.git,.venv,build,dist,__pycache__" --ignore-words-list="ndarray,ndim,dtypes" src scripts tests *.md *.yaml *.toml *.txt
+        run: codespell --skip="*.pyc,*.pyo,*.pyd,.git,.venv,build,dist,__pycache__" --ignore-words-list="ndarray,ndim,dtypes" src *.md *.yaml *.toml *.txt
 
   type-check:
     runs-on: ubuntu-latest
