@@ -1,0 +1,29 @@
+# LLMhubAudit configuration file
+# Copy to config.yaml and edit as needed.
+# Environment variables use the LLHUBAUDIT_ prefix (e.g. LLHUBAUDIT_HUBS__OLLAMA__BASE_URL).
+
+hubs:
+  ollama:
+    enabled: true
+    base_url: http://localhost:11434
+    timeout: 30.0
+  nvidia:
+    enabled: false
+    base_url: https://integrate.api.nvidia.com/v1
+    api_key: ${NVIDIA_API_KEY}
+    timeout: 30.0
+  gemini:
+    enabled: false
+    base_url: https://generativelanguage.googleapis.com/v1beta
+    api_key: ${GEMINI_API_KEY}
+    timeout: 30.0
+
+audit:
+  default_timeout: 30.0
+  max_concurrent: 5
+  retry_attempts: 3
+  retry_wait: 2.0
+
+output:
+  format: rich
+  color: true

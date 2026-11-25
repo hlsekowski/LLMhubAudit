@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Ruff check
+        run: ruff check src scripts tests
+      - name: Ruff format check
+        run: ruff format --check src scripts tests
+      - name: Black check
+        run: black --check --preview src scripts tests
+      - name: isort check
+        run: isort --check-only --profile black src scripts tests
+      - name: Codespell
+        run: codespell --skip="*.pyc,*.pyo,*.pyd,.git,.venv,build,dist,__pycache__" --ignore-words-list="ndarray,ndim,dtypes" src scripts tests *.md *.yaml *.toml *.txt
+
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -e .
+      - name: MyPy strict
+        run: mypy --strict src
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Bandit security scan
+        run: bandit -r src -f json -o bandit-report.json || true
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-test.txt
+          pip install -e .
+      - name: Run unit tests with coverage
+        run: |
+          pytest tests/unit -v --cov=llmhubaudit --cov-report=term-missing --cov-report=xml --cov-fail-under=95
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, type-check, security, test]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+      - name: Build package
+        run: python -m build
+      - name: Check package
+        run: python -m twine check dist/*
