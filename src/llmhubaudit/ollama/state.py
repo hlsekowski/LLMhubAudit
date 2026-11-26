@@ -17,8 +17,8 @@ import time
 from datetime import datetime
 from typing import Any, cast
 
-import psutil  # type: ignore[import-untyped]
-import requests  # type: ignore[import-untyped]
+import psutil
+import requests
 
 from .config import (
     ALL_REQUIRED_COLS,

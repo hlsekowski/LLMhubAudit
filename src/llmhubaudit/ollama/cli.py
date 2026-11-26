@@ -13,7 +13,7 @@ import time
 from datetime import datetime
 from typing import Any, Mapping
 
-import psutil  # type: ignore[import-untyped]
+import psutil
 
 from .config import (
     DISK_MIN_PCT,

@@ -10,8 +10,8 @@ import os
 import threading
 from typing import Any, cast
 
-import psutil  # type: ignore[import-untyped]
-import requests  # type: ignore[import-untyped]
+import psutil
+import requests
 
 from .config import SAMPLE_SEC
 

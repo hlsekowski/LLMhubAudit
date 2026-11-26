@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import re
 
-import requests  # type: ignore[import-untyped]
+import requests
 
 
 def _param_size_b(model_name: str) -> float | None:
