@@ -5,10 +5,6 @@ support tool calling. It measures cold/warm latency, resource usage (RSS, CPU,
 swap), and stores results in a CSV. It implements resumption, interruption
 handling, and a composite score for ranking usable models.
 
-This is a refactored, library-friendly version of the standalone script at
-`scripts/ollama/test_ollama_models.py`. That script remains untouched and does
-not import from this package.
-
 ## Installation
 
 The core `llmhubaudit` package has no runtime dependencies. The Ollama module

@@ -1,2 +1,2 @@
 # llmhubaudit package has no runtime dependencies.
-# Scripts in scripts/ollama/ require: ollama, requests, psutil
+# The Ollama module (llmhubaudit.ollama) requires: ollama, requests, psutil

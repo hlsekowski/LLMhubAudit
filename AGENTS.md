@@ -21,12 +21,12 @@ LLMhubAudit/
 ├── .gitignore
 ├── src/llmhubaudit/__init__.py   # package init (__version__ = "0.1.0")
 ├── tests/__init__.py         # tests package placeholder
-└── scripts/ollama/test_ollama_models.py   # standalone Ollama audit script (untouched)
+└── src/llmhubaudit/ollama/   # Ollama audit package
 ```
 
 ## Key rules
 
-- **Do not modify `scripts/ollama/test_ollama_models.py`** beyond what is needed to fit the project structure. It is a standalone script that works as-is and must not import from `llmhubaudit`.
+- The `llmhubaudit.ollama` package (under `src/llmhubaudit/ollama/`) is the Ollama audit package.
 - The `llmhubaudit` package has **no runtime dependencies** (`dependencies = []` in `pyproject.toml`). Hub-specific deps (ollama, requests, psutil, etc.) belong in the scripts that use them.
 - Python minimum version: **3.13**.
 - Ruff excludes `scripts/` from linting (`exclude = ["scripts"]` in `pyproject.toml`).
@@ -65,3 +65,4 @@ pre-commit run --all-files
 2. Do not import from `llmhubaudit`.
 3. Declare any third-party deps the script needs in the script's docstring or a hub-specific requirements file.
 4. Ruff ignores `scripts/`, so the script won't fail lint hooks.
+

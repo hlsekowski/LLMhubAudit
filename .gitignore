@@ -62,6 +62,10 @@ config.yaml
 *.log
 logs/
 
+# Ollama audit runtime artifacts
+ollama_test_results.csv
+ollama_test_state.json
+
 # OS
 .DS_Store
 Thumbs.db

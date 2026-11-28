@@ -1,8 +1,6 @@
 """CLI entry point for the Ollama audit module.
 
-Mirrors the arguments and behaviour of the standalone
-``scripts/ollama/test_ollama_models.py`` script, but uses the modular
-components in this package so the logic is importable and testable.
+CLI entry point for the Ollama audit module.
 """
 
 from __future__ import annotations

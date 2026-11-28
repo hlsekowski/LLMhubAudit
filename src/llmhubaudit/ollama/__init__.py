@@ -5,9 +5,6 @@ Measures cold/warm latency, resource usage (RSS, CPU, swap), and stores
 results in a CSV. Implements resumption, interruption handling, and a
 composite score.
 
-This package is a refactored, library-friendly version of the standalone
-script at ``scripts/ollama/test_ollama_models.py``. That script remains
-untouched and does not import from this package.
 """
 
 from .cli import main
