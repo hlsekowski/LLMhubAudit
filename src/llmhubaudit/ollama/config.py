@@ -1,8 +1,6 @@
 """Configuration constants for the Ollama audit module.
 
-These constants mirror the configuration section of the standalone
-``scripts/ollama/test_ollama_models.py`` script so behaviour is preserved
-when the logic is used as a library.
+Configuration constants for the Ollama audit module.
 """
 
 from __future__ import annotations
